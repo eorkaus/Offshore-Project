@@ -24,7 +24,6 @@
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
-        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -43,7 +42,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[33.66016801202063,124.71318731375185],[37.95105527245765,132.7151122048371]]);
+        }).fitBounds([[32.88336479968005,124.75997334067934],[34.824260713561614,129.11879902427324]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -62,19 +61,19 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_ESRIOcean_0');
-        map.getPane('pane_ESRIOcean_0').style.zIndex = 400;
-        var layer_ESRIOcean_0 = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
-            pane: 'pane_ESRIOcean_0',
-            opacity: 1.0,
+        map.createPane('pane_VWorldStreet_0');
+        map.getPane('pane_VWorldStreet_0').style.zIndex = 400;
+        var layer_VWorldStreet_0 = L.tileLayer('https://xdworld.vworld.kr/2d/Base/service/{z}/{x}/{y}.png', {
+            pane: 'pane_VWorldStreet_0',
+            opacity: 0.6,
             attribution: '',
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
-            maxNativeZoom: 20
+            maxNativeZoom: 18
         });
-        layer_ESRIOcean_0;
-        map.addLayer(layer_ESRIOcean_0);
+        layer_VWorldStreet_0;
+        map.addLayer(layer_VWorldStreet_0);
         function pop_offshore_projects_in_south_korea_area_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -132,14 +131,14 @@
                 case '1':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(76,205,138,1.0)',
                 interactive: true,
             }
@@ -147,14 +146,14 @@
                 case '10':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(227,87,75,1.0)',
                 interactive: true,
             }
@@ -162,14 +161,14 @@
                 case '11':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(200,79,152,1.0)',
                 interactive: true,
             }
@@ -177,14 +176,14 @@
                 case '12':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(132,210,125,1.0)',
                 interactive: true,
             }
@@ -192,14 +191,14 @@
                 case '13':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(227,71,134,1.0)',
                 interactive: true,
             }
@@ -207,14 +206,14 @@
                 case '14':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(112,210,112,1.0)',
                 interactive: true,
             }
@@ -222,14 +221,14 @@
                 case '16':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(64,17,236,1.0)',
                 interactive: true,
             }
@@ -237,14 +236,14 @@
                 case '17':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(77,147,233,1.0)',
                 interactive: true,
             }
@@ -252,14 +251,14 @@
                 case '18':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(216,93,22,1.0)',
                 interactive: true,
             }
@@ -267,14 +266,14 @@
                 case '19':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(203,115,98,1.0)',
                 interactive: true,
             }
@@ -282,14 +281,14 @@
                 case '2':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(163,203,33,1.0)',
                 interactive: true,
             }
@@ -297,14 +296,14 @@
                 case '21':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(162,41,210,1.0)',
                 interactive: true,
             }
@@ -312,14 +311,14 @@
                 case '22':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(221,43,185,1.0)',
                 interactive: true,
             }
@@ -327,14 +326,14 @@
                 case '23':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(164,233,121,1.0)',
                 interactive: true,
             }
@@ -342,14 +341,14 @@
                 case '24':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(228,205,75,1.0)',
                 interactive: true,
             }
@@ -357,14 +356,14 @@
                 case '25':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(105,228,189,1.0)',
                 interactive: true,
             }
@@ -372,14 +371,14 @@
                 case '27':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(238,137,139,1.0)',
                 interactive: true,
             }
@@ -387,14 +386,14 @@
                 case '28':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(103,210,135,1.0)',
                 interactive: true,
             }
@@ -402,14 +401,14 @@
                 case '29':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(56,119,236,1.0)',
                 interactive: true,
             }
@@ -417,14 +416,14 @@
                 case '3':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(105,101,232,1.0)',
                 interactive: true,
             }
@@ -432,14 +431,14 @@
                 case '30':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(228,218,31,1.0)',
                 interactive: true,
             }
@@ -447,14 +446,14 @@
                 case '31':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(60,95,200,1.0)',
                 interactive: true,
             }
@@ -462,14 +461,14 @@
                 case '32':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(235,152,52,1.0)',
                 interactive: true,
             }
@@ -477,14 +476,14 @@
                 case '33':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(235,208,125,1.0)',
                 interactive: true,
             }
@@ -492,14 +491,14 @@
                 case '35':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(140,227,27,1.0)',
                 interactive: true,
             }
@@ -507,14 +506,14 @@
                 case '36':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(107,21,227,1.0)',
                 interactive: true,
             }
@@ -522,14 +521,14 @@
                 case '37':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(151,14,230,1.0)',
                 interactive: true,
             }
@@ -537,14 +536,14 @@
                 case '38':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(17,176,234,1.0)',
                 interactive: true,
             }
@@ -552,14 +551,14 @@
                 case '39':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(221,75,106,1.0)',
                 interactive: true,
             }
@@ -567,14 +566,14 @@
                 case '4':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(110,201,198,1.0)',
                 interactive: true,
             }
@@ -582,14 +581,14 @@
                 case '40':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(19,236,40,1.0)',
                 interactive: true,
             }
@@ -597,14 +596,14 @@
                 case '41':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(195,219,38,1.0)',
                 interactive: true,
             }
@@ -612,14 +611,14 @@
                 case '42':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(228,233,80,1.0)',
                 interactive: true,
             }
@@ -627,14 +626,14 @@
                 case '43':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(115,208,226,1.0)',
                 interactive: true,
             }
@@ -642,14 +641,14 @@
                 case '44':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(219,181,111,1.0)',
                 interactive: true,
             }
@@ -657,14 +656,14 @@
                 case '45':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(226,82,127,1.0)',
                 interactive: true,
             }
@@ -672,14 +671,14 @@
                 case '47':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(201,17,146,1.0)',
                 interactive: true,
             }
@@ -687,14 +686,14 @@
                 case '48':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(208,32,205,1.0)',
                 interactive: true,
             }
@@ -702,14 +701,14 @@
                 case '49':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(116,202,149,1.0)',
                 interactive: true,
             }
@@ -717,14 +716,14 @@
                 case '5':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(45,232,191,1.0)',
                 interactive: true,
             }
@@ -732,14 +731,14 @@
                 case '50':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(215,58,197,1.0)',
                 interactive: true,
             }
@@ -747,14 +746,14 @@
                 case '51':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(154,201,110,1.0)',
                 interactive: true,
             }
@@ -762,14 +761,14 @@
                 case '52':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(132,116,237,1.0)',
                 interactive: true,
             }
@@ -777,14 +776,14 @@
                 case '53':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(214,55,74,1.0)',
                 interactive: true,
             }
@@ -792,14 +791,14 @@
                 case '54':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(123,223,210,1.0)',
                 interactive: true,
             }
@@ -807,14 +806,14 @@
                 case '55':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(77,223,106,1.0)',
                 interactive: true,
             }
@@ -822,14 +821,14 @@
                 case '56':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(106,62,202,1.0)',
                 interactive: true,
             }
@@ -837,14 +836,14 @@
                 case '57':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(110,129,220,1.0)',
                 interactive: true,
             }
@@ -852,14 +851,14 @@
                 case '58':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(158,228,19,1.0)',
                 interactive: true,
             }
@@ -867,14 +866,14 @@
                 case '59':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(208,52,222,1.0)',
                 interactive: true,
             }
@@ -882,14 +881,14 @@
                 case '6':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(157,236,140,1.0)',
                 interactive: true,
             }
@@ -897,14 +896,14 @@
                 case '60':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(16,31,237,1.0)',
                 interactive: true,
             }
@@ -912,14 +911,14 @@
                 case '61':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(223,168,121,1.0)',
                 interactive: true,
             }
@@ -927,14 +926,14 @@
                 case '62':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(154,91,210,1.0)',
                 interactive: true,
             }
@@ -942,14 +941,14 @@
                 case '63':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(24,196,208,1.0)',
                 interactive: true,
             }
@@ -957,14 +956,14 @@
                 case '64':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(211,47,129,1.0)',
                 interactive: true,
             }
@@ -972,14 +971,14 @@
                 case '65':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(113,224,69,1.0)',
                 interactive: true,
             }
@@ -987,14 +986,14 @@
                 case '66':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(133,221,184,1.0)',
                 interactive: true,
             }
@@ -1002,14 +1001,14 @@
                 case '7':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(194,54,226,1.0)',
                 interactive: true,
             }
@@ -1017,14 +1016,14 @@
                 case '8':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(112,168,214,1.0)',
                 interactive: true,
             }
@@ -1032,14 +1031,14 @@
                 case '9':
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(133,194,227,1.0)',
                 interactive: true,
             }
@@ -1047,14 +1046,14 @@
                 default:
                     return {
                 pane: 'pane_offshore_projects_in_south_korea_area_1',
-                opacity: 0.5,
+                opacity: 1,
                 color: 'rgba(1,145,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(239,76,17,1.0)',
                 interactive: true,
             }
@@ -1111,15 +1110,15 @@
         function style_SitefromPublicInfo_2_0() {
             return {
                 pane: 'pane_SitefromPublicInfo_2',
-                radius: 1.6,
-                opacity: 0.5,
-                color: 'rgba(61,128,53,0.0)',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 2.0,
                 fill: true,
-                fillopacity: 0.5,
+                fillOpacity: 1,
                 fillColor: 'rgba(84,176,74,1.0)',
                 interactive: true,
             }
@@ -1139,7 +1138,7 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_SitefromPublicInfo_2_0(feature));
+                return L.circleMarker(latlng, style_SitefromPublicInfo_2_0(feature));
             },
         });
         bounds_group.addLayer(layer_SitefromPublicInfo_2);
