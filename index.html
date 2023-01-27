@@ -10,9 +10,11 @@
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
-        #map {
-            width: 1589px;
-            height: 721px;
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
         }
         </style>
         <title></title>
@@ -22,6 +24,7 @@
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -30,12 +33,17 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/OffshoreprojectsinSouthKorea_Area_1.js"></script>
+        <script src="data/offshore_projects_in_south_korea_area_1.js"></script>
         <script src="data/SitefromPublicInfo_2.js"></script>
         <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[32.10650395756431,119.28900541984368],[39.28358538838381,138.63355667300243]]);
+        }).fitBounds([[33.66016801202063,124.71318731375185],[37.95105527245765,132.7151122048371]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -53,1024 +61,1048 @@
         .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
-            map.setMaxBounds(map.getBounds());
         }
-        map.createPane('pane_EsriOcean_0');
-        map.getPane('pane_EsriOcean_0').style.zIndex = 400;
-        var layer_EsriOcean_0 = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
-            pane: 'pane_EsriOcean_0',
+        map.createPane('pane_ESRIOcean_0');
+        map.getPane('pane_ESRIOcean_0').style.zIndex = 400;
+        var layer_ESRIOcean_0 = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_ESRIOcean_0',
             opacity: 1.0,
             attribution: '',
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
-            maxNativeZoom: 10
+            maxNativeZoom: 20
         });
-        layer_EsriOcean_0;
-        map.addLayer(layer_EsriOcean_0);
-        function pop_OffshoreprojectsinSouthKorea_Area_1(feature, layer) {
+        layer_ESRIOcean_0;
+        map.addLayer(layer_ESRIOcean_0);
+        function pop_offshore_projects_in_south_korea_area_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['NO'] !== null ? autolinker.link(feature.properties['NO'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_ID'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_ID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_Title'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_Title'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_Project Name (EN)'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_Project Name (EN)'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_Developer'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_Developer'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_Capacity'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_Capacity'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_EBL_get'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_EBL_get'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_EBL_end'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_EBL_end'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_EBL_No'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_EBL_No'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Offshore Wind Projects in South Korea_EBL Check'] !== null ? autolinker.link(feature.properties['Offshore Wind Projects in South Korea_EBL Check'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_OffshoreprojectsinSouthKorea_Area_1_0(feature) {
-            switch(String(feature.properties['NO'])) {
-                case '1':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(240,215,144,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '2':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(91,78,227,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '3':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(93,230,59,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '4':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(238,138,88,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '5':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(48,216,84,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '6':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(234,134,149,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '7':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(224,14,210,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '9':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(225,157,38,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '10':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(211,27,73,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '11':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(102,240,86,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '12':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(95,151,203,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '13':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(236,108,192,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '14':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(215,235,58,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '16':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(237,134,55,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '17':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(230,97,106,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '18':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(234,16,180,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '19':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(149,75,233,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '21':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(174,20,221,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '22':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(211,160,101,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '23':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(133,225,198,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '24':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(82,214,150,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '25':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(211,126,113,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '27':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(170,231,112,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '28':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(218,221,44,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '29':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(139,51,206,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '30':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(206,121,159,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '31':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(35,72,203,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '32':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(85,132,233,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '33':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(237,38,108,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '35':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(114,42,238,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '36':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(42,238,124,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '37':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(222,100,204,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '38':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(227,203,96,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '39':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(108,203,227,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '40':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(150,133,227,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '41':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(17,20,221,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '42':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(122,213,83,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '43':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(229,110,73,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '44':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(230,120,116,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '45':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(23,236,151,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '47':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(99,231,218,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '48':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(33,232,193,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '49':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(173,223,65,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '50':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(157,238,106,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '51':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(190,133,218,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '52':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(123,83,233,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '53':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(137,229,166,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '54':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(210,201,95,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '55':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(50,204,204,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '56':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(233,13,134,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '57':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(72,163,201,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '58':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(196,218,115,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '59':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(47,65,204,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '60':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(131,191,228,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '61':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(96,142,206,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '62':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(99,206,217,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '63':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(215,123,218,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '64':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(52,229,73,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '65':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(78,216,78,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '66':
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(148,228,35,1.0)',
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-                opacity: 0.5,
-                color: 'rgba(35,35,35,0.5019607843137255)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1, 
-                fill: true,
-                fillopacity: 0.5,
-                fillColor: 'rgba(221,138,233,1.0)',
-                interactive: true,
-            }
-                    break;
-            }
-        }
-        map.createPane('pane_OffshoreprojectsinSouthKorea_Area_1');
-        map.getPane('pane_OffshoreprojectsinSouthKorea_Area_1').style.zIndex = 401;
-        map.getPane('pane_OffshoreprojectsinSouthKorea_Area_1').style['mix-blend-mode'] = 'normal';
-        var layer_OffshoreprojectsinSouthKorea_Area_1 = new L.geoJson(json_OffshoreprojectsinSouthKorea_Area_1, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_OffshoreprojectsinSouthKorea_Area_1',
-            layerName: 'layer_OffshoreprojectsinSouthKorea_Area_1',
-            pane: 'pane_OffshoreprojectsinSouthKorea_Area_1',
-            onEachFeature: pop_OffshoreprojectsinSouthKorea_Area_1,
-            style: style_OffshoreprojectsinSouthKorea_Area_1_0,
-        });
-        bounds_group.addLayer(layer_OffshoreprojectsinSouthKorea_Area_1);
-        map.addLayer(layer_OffshoreprojectsinSouthKorea_Area_1);
-        function pop_SitefromPublicInfo_2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Longitude'] !== null ? autolinker.link(feature.properties['Longitude'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ID_hide'] !== null ? autolinker.link(feature.properties['ID_hide'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Title</th>\
+                        <td>' + (feature.properties['Title'] !== null ? autolinker.link(feature.properties['Title'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Title'] !== null ? autolinker.link(feature.properties['Title'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Project Name (EN)</th>\
+                        <td>' + (feature.properties['Project Name (EN)'] !== null ? autolinker.link(feature.properties['Project Name (EN)'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Project Name (KR)'] !== null ? autolinker.link(feature.properties['Project Name (KR)'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Developer</th>\
+                        <td>' + (feature.properties['Developer'] !== null ? autolinker.link(feature.properties['Developer'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Developer'] !== null ? autolinker.link(feature.properties['Developer'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Capacity</th>\
+                        <td>' + (feature.properties['Capacity'] !== null ? autolinker.link(feature.properties['Capacity'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Capacity'] !== null ? autolinker.link(feature.properties['Capacity'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">EBL_get</th>\
+                        <td>' + (feature.properties['EBL_get'] !== null ? autolinker.link(feature.properties['EBL_get'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Note'] !== null ? autolinker.link(feature.properties['Note'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">EBL_end</th>\
+                        <td>' + (feature.properties['EBL_end'] !== null ? autolinker.link(feature.properties['EBL_end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EBL_No</th>\
+                        <td>' + (feature.properties['EBL_No'] !== null ? autolinker.link(feature.properties['EBL_No'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_offshore_projects_in_south_korea_area_1_0(feature) {
+            switch(String(feature.properties['ID'])) {
+                case '1':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(76,205,138,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(227,87,75,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(200,79,152,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(132,210,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '13':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(227,71,134,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '14':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(112,210,112,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '16':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(64,17,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '17':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(77,147,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '18':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(216,93,22,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '19':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(203,115,98,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(163,203,33,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '21':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(162,41,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '22':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(221,43,185,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '23':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(164,233,121,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '24':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(228,205,75,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '25':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(105,228,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '27':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(238,137,139,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '28':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(103,210,135,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '29':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(56,119,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(105,101,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '30':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(228,218,31,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '31':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(60,95,200,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '32':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(235,152,52,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '33':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(235,208,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '35':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(140,227,27,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '36':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(107,21,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '37':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(151,14,230,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '38':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(17,176,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '39':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(221,75,106,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(110,201,198,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '40':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(19,236,40,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '41':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(195,219,38,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '42':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(228,233,80,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '43':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(115,208,226,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '44':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(219,181,111,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '45':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(226,82,127,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '47':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(201,17,146,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '48':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(208,32,205,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '49':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(116,202,149,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(45,232,191,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '50':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(215,58,197,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '51':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(154,201,110,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '52':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(132,116,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '53':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(214,55,74,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '54':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(123,223,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '55':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(77,223,106,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '56':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(106,62,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '57':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(110,129,220,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '58':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(158,228,19,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '59':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(208,52,222,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(157,236,140,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '60':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(16,31,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '61':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(223,168,121,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '62':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(154,91,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '63':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(24,196,208,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '64':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(211,47,129,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '65':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(113,224,69,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '66':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(133,221,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(194,54,226,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(112,168,214,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(133,194,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_offshore_projects_in_south_korea_area_1',
+                opacity: 0.5,
+                color: 'rgba(1,145,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillopacity: 0.5,
+                fillColor: 'rgba(239,76,17,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_offshore_projects_in_south_korea_area_1');
+        map.getPane('pane_offshore_projects_in_south_korea_area_1').style.zIndex = 401;
+        map.getPane('pane_offshore_projects_in_south_korea_area_1').style['mix-blend-mode'] = 'normal';
+        var layer_offshore_projects_in_south_korea_area_1 = new L.geoJson(json_offshore_projects_in_south_korea_area_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_offshore_projects_in_south_korea_area_1',
+            layerName: 'layer_offshore_projects_in_south_korea_area_1',
+            pane: 'pane_offshore_projects_in_south_korea_area_1',
+            onEachFeature: pop_offshore_projects_in_south_korea_area_1,
+            style: style_offshore_projects_in_south_korea_area_1_0,
+        });
+        bounds_group.addLayer(layer_offshore_projects_in_south_korea_area_1);
+        map.addLayer(layer_offshore_projects_in_south_korea_area_1);
+        function pop_SitefromPublicInfo_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Title</th>\
+                        <td>' + (feature.properties['Title'] !== null ? autolinker.link(feature.properties['Title'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Developer</th>\
+                        <td>' + (feature.properties['Developer'] !== null ? autolinker.link(feature.properties['Developer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Capacity</th>\
+                        <td>' + (feature.properties['Capacity'] !== null ? autolinker.link(feature.properties['Capacity'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1079,16 +1111,16 @@
         function style_SitefromPublicInfo_2_0() {
             return {
                 pane: 'pane_SitefromPublicInfo_2',
-                radius: 2.0,
+                radius: 1.6,
                 opacity: 0.5,
-                color: 'rgba(35,35,35,0.0)',
+                color: 'rgba(61,128,53,0.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillopacity: 0.5,
-                fillColor: 'rgba(0,170,110,1.0)',
+                fillColor: 'rgba(84,176,74,1.0)',
                 interactive: true,
             }
         }
@@ -1107,19 +1139,19 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_SitefromPublicInfo_2_0(feature));
+                return L.shapeMarker(latlng, style_SitefromPublicInfo_2_0(feature));
             },
         });
         bounds_group.addLayer(layer_SitefromPublicInfo_2);
         map.addLayer(layer_SitefromPublicInfo_2);
         setBounds();
         var i = 0;
-        layer_OffshoreprojectsinSouthKorea_Area_1.eachLayer(function(layer) {
+        layer_offshore_projects_in_south_korea_area_1.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_OffshoreprojectsinSouthKorea_Area_1_eval_expression(context) !== null?String('<div style="color: #000000; font-size: 8pt; font-family: \'Calibri\', sans-serif;">' + exp_label_OffshoreprojectsinSouthKorea_Area_1_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_OffshoreprojectsinSouthKorea_Area_1'});
+            layer.bindTooltip((exp_label_offshore_projects_in_south_korea_area_1_eval_expression(context) !== null?String('<div style="color: #000000; font-size: 9pt; font-family: \'Calibri\', sans-serif;">' + exp_label_offshore_projects_in_south_korea_area_1_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_offshore_projects_in_south_korea_area_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -1132,22 +1164,22 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_SitefromPublicInfo_2_eval_expression(context) !== null?String('<div style="color: #00aa6e; font-size: 8pt; font-family: \'Calibri\', sans-serif;">' + exp_label_SitefromPublicInfo_2_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SitefromPublicInfo_2'});
+            layer.bindTooltip((layer.feature.properties['Developer'] !== null?String('<div style="color: #00ac6a; font-size: 9pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Developer']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SitefromPublicInfo_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_OffshoreprojectsinSouthKorea_Area_1,layer_SitefromPublicInfo_2]);
+        resetLabels([layer_offshore_projects_in_south_korea_area_1,layer_SitefromPublicInfo_2]);
         map.on("zoomend", function(){
-            resetLabels([layer_OffshoreprojectsinSouthKorea_Area_1,layer_SitefromPublicInfo_2]);
+            resetLabels([layer_offshore_projects_in_south_korea_area_1,layer_SitefromPublicInfo_2]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_OffshoreprojectsinSouthKorea_Area_1,layer_SitefromPublicInfo_2]);
+            resetLabels([layer_offshore_projects_in_south_korea_area_1,layer_SitefromPublicInfo_2]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_OffshoreprojectsinSouthKorea_Area_1,layer_SitefromPublicInfo_2]);
+            resetLabels([layer_offshore_projects_in_south_korea_area_1,layer_SitefromPublicInfo_2]);
         });
         </script>
     </body>

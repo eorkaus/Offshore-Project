@@ -757,27 +757,14 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_label_OffshoreprojectsinSouthKorea_Area_1_eval_expression(context) {
-    // "Offshore Wind Projects in South Korea_Title" || ' ' || "Offshore Wind Projects in South Korea_Capacity" || ' MW' || '\n' || "Offshore Wind Projects in South Korea_Developer"
+function exp_label_offshore_projects_in_south_korea_area_1_eval_expression(context) {
+    // "Project Name (EN)" || ' ' || "Capacity" || 'MW'
 
     var feature = context.feature;
     
     if (feature.properties) {
-        return (((((feature.properties['Offshore Wind Projects in South Korea_Title']  + ' ') + feature.properties['Offshore Wind Projects in South Korea_Capacity'] ) + ' MW') + '\n') + feature.properties['Offshore Wind Projects in South Korea_Developer'] );
+        return (((feature.properties['Project Name (EN)']  + ' ') + feature.properties['Capacity'] ) + 'MW');
     } else {
-        return (((((feature['Offshore Wind Projects in South Korea_Title']  + ' ') + feature['Offshore Wind Projects in South Korea_Capacity'] ) + ' MW') + '\n') + feature['Offshore Wind Projects in South Korea_Developer'] );
-    }
-}
-
-
-function exp_label_SitefromPublicInfo_2_eval_expression(context) {
-    // "Title" || '\n' || "Developer"
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return ((feature.properties['Title']  + '\n') + feature.properties['Developer'] );
-    } else {
-        return ((feature['Title']  + '\n') + feature['Developer'] );
+        return (((feature['Project Name (EN)']  + ' ') + feature['Capacity'] ) + 'MW');
     }
 }
