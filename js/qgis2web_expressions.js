@@ -757,7 +757,20 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_label_offshore_projects_in_south_korea_area_1_eval_expression(context) {
+function exp_label_KoreaProjectData_4_eval_expression(context) {
+    // "Project name" || ' ' || if("Capacity" > 0, "Capacity", 'xxx') || 'MW'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (((feature.properties['Project name']  + ' ') + fnc_if([(feature.properties['Capacity']  > 0),feature.properties['Capacity'] ,'xxx'], context)) + 'MW');
+    } else {
+        return (((feature['Project name']  + ' ') + fnc_if([(feature['Capacity']  > 0),feature['Capacity'] ,'xxx'], context)) + 'MW');
+    }
+}
+
+
+function exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context) {
     // "Project Name (EN)" || ' ' || "Capacity" || 'MW'
 
     var feature = context.feature;
