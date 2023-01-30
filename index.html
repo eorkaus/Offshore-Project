@@ -20,6 +20,9 @@
         <title></title>
     </head>
     <body>
+        <p>
+            <img scr="data/KRBathymetry_0.png" alt="K2 Management" width="100" > 
+        </p>
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
@@ -71,7 +74,8 @@
         var img_bounds_KRBathymetry_0 = [[32.495833333,123.4625],[40.691666667,130.65]];
         var layer_KRBathymetry_0 = new L.imageOverlay(img_KRBathymetry_0,
                                               img_bounds_KRBathymetry_0,
-                                              {pane: 'pane_KRBathymetry_0'});
+                                              {pane: 'pane_KRBathymetry_0',
+                                              opacity: 0.1});
         bounds_group.addLayer(layer_KRBathymetry_0);
         map.addLayer(layer_KRBathymetry_0);
         map.createPane('pane_VWorldStreet_1');
