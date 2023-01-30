@@ -127,3 +127,13 @@
         .leaflet-control-layers-toggle {
             background-color: #f8f8f8 !important;
         }
+        #logo {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            opacity:1;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 20px;
+            text-align: left;
+          }
