@@ -770,7 +770,7 @@ function exp_label_Confidential_Indicative_5_eval_expression(context) {
 }
 
 
-function exp_label_OffshoreprojectsSK_02_6_eval_expression(context) {
+function exp_label_OffshoreprojectsSK_02_7_eval_expression(context) {
     // "Title" || ' ' || "Capacity" || 'MW'
 
     var feature = context.feature;
