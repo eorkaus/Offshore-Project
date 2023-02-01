@@ -17,14 +17,17 @@
             margin: 0;
         }
         </style>
-        <title></title>
+        <title>KR Offshore Wind Farm</title>
     </head>
     <body>
+
         <div id="logo"
-            style="display:block; position:absolute; bottom: 5px; left :5px; z-index:999; font-size:6pt; color:black">
-            <img src="LogoK2.png" alt="K2 Management" width="30" hight="auto">
+            style="display:block; position:absolute; bottom: 5px; left :5px; z-index:999; font-size:6pt; color:black; font-style: italic;">
+            <a href="https://www.k2management.com/">
+            <img src="LogoK2.png" alt="K2 Management" width="30" hight="auto"></a>
             <br><text>K2 Managment internal use<br>gjl@K2management.com</text>
         </div>
+
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
@@ -37,12 +40,11 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="js/leaflet-tilelayer-wmts.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/Militaryarea_3.js"></script>
-        <script src="data/Confidential_Indicative_4.js"></script>
-        <script src="data/OffshoreprojectsSK_01offshore_projects_sk_01_5.js"></script>
-        <script src="data/SitefromPublicInfo_6.js"></script>
+        <script src="data/Militaryarea_4.js"></script>
+        <script src="data/Confidential_Indicative_5.js"></script>
+        <script src="data/OffshoreprojectsSK_02_6.js"></script>
+        <script src="data/SitefromPublicInfo_7.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -51,7 +53,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[32.95257477952335,124.35103274354792],[36.83581786219054,130.1836759236032]]);
+        }).fitBounds([[34.326271768253974,125.3931887169433],[36.97614735544618,130.45239281850664]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -71,24 +73,10 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_KHOABaseMapWaterDepth_0');
-        map.getPane('pane_KHOABaseMapWaterDepth_0').style.zIndex = 400;
-        var layer_KHOABaseMapWaterDepth_0 = L.tileLayer.wmts('http://www.khoa.go.kr/oceanmap/wmts/1.0.0/3459F59F6843B4B745D054ED6/WMTSCapabilities.xm', {
-            pane: 'pane_KHOABaseMapWaterDepth_0',
-            layer: 'BASEMAP_DLENG3857',
-            tilematrixSet: 'OtmsCompatible',
-            format: 'image/png',
-            style: 'default',
-            uppercase: true,
-            transparent: true,
-            continuousWorld : true,
-            opacity: 1.0,
-            attribution: '',
-        });
-        map.createPane('pane_VWorldStreet_1');
-        map.getPane('pane_VWorldStreet_1').style.zIndex = 401;
-        var layer_VWorldStreet_1 = L.tileLayer('https://xdworld.vworld.kr/2d/Base/service/{z}/{x}/{y}.png', {
-            pane: 'pane_VWorldStreet_1',
+        map.createPane('pane_VWorldStreet_0');
+        map.getPane('pane_VWorldStreet_0').style.zIndex = 400;
+        var layer_VWorldStreet_0 = L.tileLayer('https://xdworld.vworld.kr/2d/Base/service/{z}/{x}/{y}.png', {
+            pane: 'pane_VWorldStreet_0',
             opacity: 0.8,
             attribution: '',
             minZoom: 1,
@@ -96,17 +84,41 @@
             minNativeZoom: 0,
             maxNativeZoom: 18
         });
-        layer_VWorldStreet_1;
-        map.addLayer(layer_VWorldStreet_1);
-        map.createPane('pane_VesselDensity_2');
-        map.getPane('pane_VesselDensity_2').style.zIndex = 402;
-        var img_VesselDensity_2 = 'data/VesselDensity_2.png';
-        var img_bounds_VesselDensity_2 = [[32.20241530403048,122.83329205119063],[40.22779674696208,133.12228531856908]];
-        var layer_VesselDensity_2 = new L.imageOverlay(img_VesselDensity_2,
-                                              img_bounds_VesselDensity_2,
-                                              {pane: 'pane_VesselDensity_2'});
-        bounds_group.addLayer(layer_VesselDensity_2);
-        function pop_Militaryarea_3(feature, layer) {
+        layer_VWorldStreet_0;
+        map.createPane('pane_0_MyOSM_1');
+        map.getPane('pane_0_MyOSM_1').style.zIndex = 401;
+        var layer_0_MyOSM_1 = L.tileLayer('https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=XdZYi0iz2k4HunR1uGgQ', {
+            pane: 'pane_0_MyOSM_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_0_MyOSM_1;
+        map.createPane('pane_0_MyOcean_2');
+        map.getPane('pane_0_MyOcean_2').style.zIndex = 402;
+        var layer_0_MyOcean_2 = L.tileLayer('https://api.maptiler.com/maps/ocean/{z}/{x}/{y}.png?key=XdZYi0iz2k4HunR1uGgQ', {
+            pane: 'pane_0_MyOcean_2',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_0_MyOcean_2;
+        map.addLayer(layer_0_MyOcean_2);
+        map.createPane('pane_VesselDensity_3');
+        map.getPane('pane_VesselDensity_3').style.zIndex = 403;
+        var img_VesselDensity_3 = 'data/VesselDensity_3.png';
+        var img_bounds_VesselDensity_3 = [[32.20241530403048,122.83329205119063],[40.22779674696208,133.12228531856908]];
+        var layer_VesselDensity_3 = new L.imageOverlay(img_VesselDensity_3,
+                                              img_bounds_VesselDensity_3,
+                                              {pane: 'pane_VesselDensity_3'});
+        bounds_group.addLayer(layer_VesselDensity_3);
+        function pop_Militaryarea_4(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -136,7 +148,7 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        var pattern_Militaryarea_3_0 = new L.StripePattern({
+        var pattern_Militaryarea_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#000000',
@@ -144,17 +156,17 @@
             spaceOpacity: 0,
             angle: 315
         });
-        pattern_Militaryarea_3_0.addTo(map);
-        function style_Militaryarea_3_0() {
+        pattern_Militaryarea_4_0.addTo(map);
+        function style_Militaryarea_4_0() {
             return {
-                pane: 'pane_Militaryarea_3',
+                pane: 'pane_Militaryarea_4',
                 stroke: false,
                 fillOpacity: 1,
-                fillPattern: pattern_Militaryarea_3_0,
+                fillPattern: pattern_Militaryarea_4_0,
                 interactive: true,
             }
         }
-        var pattern_Militaryarea_3_1 = new L.StripePattern({
+        var pattern_Militaryarea_4_1 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#000000',
@@ -162,19 +174,19 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_Militaryarea_3_1.addTo(map);
-        function style_Militaryarea_3_1() {
+        pattern_Militaryarea_4_1.addTo(map);
+        function style_Militaryarea_4_1() {
             return {
-                pane: 'pane_Militaryarea_3',
+                pane: 'pane_Militaryarea_4',
                 stroke: false,
                 fillOpacity: 1,
-                fillPattern: pattern_Militaryarea_3_1,
+                fillPattern: pattern_Militaryarea_4_1,
                 interactive: true,
             }
         }
-        function style_Militaryarea_3_2() {
+        function style_Militaryarea_4_2() {
             return {
-                pane: 'pane_Militaryarea_3',
+                pane: 'pane_Militaryarea_4',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -185,20 +197,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Militaryarea_3');
-        map.getPane('pane_Militaryarea_3').style.zIndex = 403;
-        map.getPane('pane_Militaryarea_3').style['mix-blend-mode'] = 'normal';
-        var layer_Militaryarea_3 = new L.geoJson.multiStyle(json_Militaryarea_3, {
+        map.createPane('pane_Militaryarea_4');
+        map.getPane('pane_Militaryarea_4').style.zIndex = 404;
+        map.getPane('pane_Militaryarea_4').style['mix-blend-mode'] = 'normal';
+        var layer_Militaryarea_4 = new L.geoJson.multiStyle(json_Militaryarea_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Militaryarea_3',
-            layerName: 'layer_Militaryarea_3',
-            pane: 'pane_Militaryarea_3',
-            onEachFeature: pop_Militaryarea_3,
-            styles: [style_Militaryarea_3_0,style_Militaryarea_3_1,style_Militaryarea_3_2,]
+            dataVar: 'json_Militaryarea_4',
+            layerName: 'layer_Militaryarea_4',
+            pane: 'pane_Militaryarea_4',
+            onEachFeature: pop_Militaryarea_4,
+            styles: [style_Militaryarea_4_0,style_Militaryarea_4_1,style_Militaryarea_4_2,]
         });
-        bounds_group.addLayer(layer_Militaryarea_3);
-        function pop_Confidential_Indicative_4(feature, layer) {
+        bounds_group.addLayer(layer_Militaryarea_4);
+        function pop_Confidential_Indicative_5(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -216,7 +228,8 @@
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Project name'] !== null ? autolinker.link(feature.properties['Project name'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Project name</th>\
+                        <td>' + (feature.properties['Project name'] !== null ? autolinker.link(feature.properties['Project name'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
@@ -237,189 +250,51 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
+        var pattern_Confidential_Indicative_5_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
-            color: '#a9ea70',
+            color: '#f3b117',
             opacity: 1.0,
             spaceOpacity: 0,
-            angle: 225
+            angle: 315
         });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 2.0,
-            color: '#cc6c9b',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 225
-        });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 2.0,
-            color: '#5089ca',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 225
-        });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 2.0,
-            color: '#2974c9',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 225
-        });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 2.0,
-            color: '#a9ea70',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 225
-        });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 2.0,
-            color: '#cc6c9b',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 225
-        });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 2.0,
-            color: '#5089ca',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 225
-        });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
-            weight: 0.3,
-            spaceWeight: 2.0,
-            color: '#2974c9',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 225
-        });
-        pattern_Confidential_Indicative_4_0.addTo(map);
-        function style_Confidential_Indicative_4_0(feature) {
-            switch(String(feature.properties['Developper'])) {
-                case 'KREDO':
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
+        pattern_Confidential_Indicative_5_0.addTo(map);
+        function style_Confidential_Indicative_5_0() {
+            return {
+                pane: 'pane_Confidential_Indicative_5',
                 stroke: false,
                 fillOpacity: 1,
-                fillPattern: pattern_Confidential_Indicative_4_0,
+                fillPattern: pattern_Confidential_Indicative_5_0,
                 interactive: true,
-            }
-                    break;
-                case 'Pacifico':
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
-                stroke: false,
-                fillOpacity: 1,
-                fillPattern: pattern_Confidential_Indicative_4_0,
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
-                stroke: false,
-                fillOpacity: 1,
-                fillPattern: pattern_Confidential_Indicative_4_0,
-                interactive: true,
-            }
-                    break;
-                case 'Hanwha':
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
-                stroke: false,
-                fillOpacity: 1,
-                fillPattern: pattern_Confidential_Indicative_4_0,
-                interactive: true,
-            }
-                    break;
             }
         }
-        function style_Confidential_Indicative_4_1(feature) {
-            switch(String(feature.properties['Developper'])) {
-                case 'KREDO':
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
+        function style_Confidential_Indicative_5_1() {
+            return {
+                pane: 'pane_Confidential_Indicative_5',
                 opacity: 1,
-                color: 'rgba(169,234,112,1.0)',
+                color: 'rgba(243,177,23,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
                 weight: 2.0,
                 fillOpacity: 0,
                 interactive: true,
-            }
-                    break;
-                case 'Pacifico':
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
-                opacity: 1,
-                color: 'rgba(204,108,155,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 2.0,
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
-                opacity: 1,
-                color: 'rgba(80,137,202,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 2.0,
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-                case 'Hanwha':
-                    return {
-                pane: 'pane_Confidential_Indicative_4',
-                opacity: 1,
-                color: 'rgba(41,116,201,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 2.0,
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
             }
         }
-        map.createPane('pane_Confidential_Indicative_4');
-        map.getPane('pane_Confidential_Indicative_4').style.zIndex = 404;
-        map.getPane('pane_Confidential_Indicative_4').style['mix-blend-mode'] = 'normal';
-        var layer_Confidential_Indicative_4 = new L.geoJson.multiStyle(json_Confidential_Indicative_4, {
+        map.createPane('pane_Confidential_Indicative_5');
+        map.getPane('pane_Confidential_Indicative_5').style.zIndex = 405;
+        map.getPane('pane_Confidential_Indicative_5').style['mix-blend-mode'] = 'normal';
+        var layer_Confidential_Indicative_5 = new L.geoJson.multiStyle(json_Confidential_Indicative_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Confidential_Indicative_4',
-            layerName: 'layer_Confidential_Indicative_4',
-            pane: 'pane_Confidential_Indicative_4',
-            onEachFeature: pop_Confidential_Indicative_4,
-            styles: [style_Confidential_Indicative_4_0,style_Confidential_Indicative_4_1,]
+            dataVar: 'json_Confidential_Indicative_5',
+            layerName: 'layer_Confidential_Indicative_5',
+            pane: 'pane_Confidential_Indicative_5',
+            onEachFeature: pop_Confidential_Indicative_5,
+            styles: [style_Confidential_Indicative_5_0,style_Confidential_Indicative_5_1,]
         });
-        bounds_group.addLayer(layer_Confidential_Indicative_4);
-        map.addLayer(layer_Confidential_Indicative_4);
-        function pop_OffshoreprojectsSK_01offshore_projects_sk_01_5(feature, layer) {
+        bounds_group.addLayer(layer_Confidential_Indicative_5);
+        function pop_OffshoreprojectsSK_02_6(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -433,6 +308,9 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                     <tr>\
                         <th scope="row">Title</th>\
                         <td>' + (feature.properties['Title'] !== null ? autolinker.link(feature.properties['Title'].toLocaleString()) : '') + '</td>\
@@ -465,11 +343,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_OffshoreprojectsSK_01offshore_projects_sk_01_5_0(feature) {
+        function style_OffshoreprojectsSK_02_6_0(feature) {
             switch(String(feature.properties['q2wHide_CPRange'])) {
                 case '200> Capacity >=100':
                     return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
+                pane: 'pane_OffshoreprojectsSK_02_6',
                 opacity: 1,
                 color: 'rgba(125,139,143,1.0)',
                 dashArray: '',
@@ -484,7 +362,7 @@
                     break;
                 case '300> Capacity >=200':
                     return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
+                pane: 'pane_OffshoreprojectsSK_02_6',
                 opacity: 1,
                 color: 'rgba(125,139,143,1.0)',
                 dashArray: '',
@@ -499,7 +377,7 @@
                     break;
                 case '300> Capacity >=300':
                     return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
+                pane: 'pane_OffshoreprojectsSK_02_6',
                 opacity: 1,
                 color: 'rgba(125,139,143,1.0)',
                 dashArray: '',
@@ -514,7 +392,7 @@
                     break;
                 case '500> Capacity >=400':
                     return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
+                pane: 'pane_OffshoreprojectsSK_02_6',
                 opacity: 1,
                 color: 'rgba(125,139,143,1.0)',
                 dashArray: '',
@@ -529,7 +407,7 @@
                     break;
                 case 'Over 500 MW':
                     return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
+                pane: 'pane_OffshoreprojectsSK_02_6',
                 opacity: 1,
                 color: 'rgba(125,139,143,1.0)',
                 dashArray: '',
@@ -544,7 +422,7 @@
                     break;
                 case 'Under 100 MW':
                     return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
+                pane: 'pane_OffshoreprojectsSK_02_6',
                 opacity: 1,
                 color: 'rgba(125,139,143,1.0)',
                 dashArray: '',
@@ -559,21 +437,21 @@
                     break;
             }
         }
-        map.createPane('pane_OffshoreprojectsSK_01offshore_projects_sk_01_5');
-        map.getPane('pane_OffshoreprojectsSK_01offshore_projects_sk_01_5').style.zIndex = 405;
-        map.getPane('pane_OffshoreprojectsSK_01offshore_projects_sk_01_5').style['mix-blend-mode'] = 'normal';
-        var layer_OffshoreprojectsSK_01offshore_projects_sk_01_5 = new L.geoJson(json_OffshoreprojectsSK_01offshore_projects_sk_01_5, {
+        map.createPane('pane_OffshoreprojectsSK_02_6');
+        map.getPane('pane_OffshoreprojectsSK_02_6').style.zIndex = 406;
+        map.getPane('pane_OffshoreprojectsSK_02_6').style['mix-blend-mode'] = 'normal';
+        var layer_OffshoreprojectsSK_02_6 = new L.geoJson(json_OffshoreprojectsSK_02_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-            layerName: 'layer_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-            pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-            onEachFeature: pop_OffshoreprojectsSK_01offshore_projects_sk_01_5,
-            style: style_OffshoreprojectsSK_01offshore_projects_sk_01_5_0,
+            dataVar: 'json_OffshoreprojectsSK_02_6',
+            layerName: 'layer_OffshoreprojectsSK_02_6',
+            pane: 'pane_OffshoreprojectsSK_02_6',
+            onEachFeature: pop_OffshoreprojectsSK_02_6,
+            style: style_OffshoreprojectsSK_02_6_0,
         });
-        bounds_group.addLayer(layer_OffshoreprojectsSK_01offshore_projects_sk_01_5);
-        map.addLayer(layer_OffshoreprojectsSK_01offshore_projects_sk_01_5);
-        function pop_SitefromPublicInfo_6(feature, layer) {
+        bounds_group.addLayer(layer_OffshoreprojectsSK_02_6);
+        map.addLayer(layer_OffshoreprojectsSK_02_6);
+        function pop_SitefromPublicInfo_7(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -603,9 +481,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_SitefromPublicInfo_6_0() {
+        function style_SitefromPublicInfo_7_0() {
             return {
-                pane: 'pane_SitefromPublicInfo_6',
+                pane: 'pane_SitefromPublicInfo_7',
                 radius: 2.0,
                 opacity: 1,
                 color: 'rgba(61,128,53,1.0)',
@@ -619,36 +497,36 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_SitefromPublicInfo_6');
-        map.getPane('pane_SitefromPublicInfo_6').style.zIndex = 406;
-        map.getPane('pane_SitefromPublicInfo_6').style['mix-blend-mode'] = 'normal';
-        var layer_SitefromPublicInfo_6 = new L.geoJson(json_SitefromPublicInfo_6, {
+        map.createPane('pane_SitefromPublicInfo_7');
+        map.getPane('pane_SitefromPublicInfo_7').style.zIndex = 407;
+        map.getPane('pane_SitefromPublicInfo_7').style['mix-blend-mode'] = 'normal';
+        var layer_SitefromPublicInfo_7 = new L.geoJson(json_SitefromPublicInfo_7, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_SitefromPublicInfo_6',
-            layerName: 'layer_SitefromPublicInfo_6',
-            pane: 'pane_SitefromPublicInfo_6',
-            onEachFeature: pop_SitefromPublicInfo_6,
+            dataVar: 'json_SitefromPublicInfo_7',
+            layerName: 'layer_SitefromPublicInfo_7',
+            pane: 'pane_SitefromPublicInfo_7',
+            onEachFeature: pop_SitefromPublicInfo_7,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_SitefromPublicInfo_6_0(feature));
+                return L.circleMarker(latlng, style_SitefromPublicInfo_7_0(feature));
             },
         });
-        bounds_group.addLayer(layer_SitefromPublicInfo_6);
-        map.addLayer(layer_SitefromPublicInfo_6);
+        bounds_group.addLayer(layer_SitefromPublicInfo_7);
+        map.addLayer(layer_SitefromPublicInfo_7);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/SitefromPublicInfo_6.png" /> Site from Public Info': layer_SitefromPublicInfo_6,'Offshore projects SK_01 — offshore_projects_sk_01<br /><table><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_200Capacity1000.png" /></td><td>200> Capacity >=100</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_300Capacity2001.png" /></td><td>300> Capacity >=200</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_300Capacity3002.png" /></td><td>300> Capacity >=300</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_500Capacity4003.png" /></td><td>500> Capacity >=400</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Over500MW4.png" /></td><td>Over 500 MW</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Under100MW5.png" /></td><td>Under 100 MW</td></tr></table>': layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,'Confidential_Indicative<br /><table><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_KREDO0.png" /></td><td>KREDO</td></tr><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_Pacifico1.png" /></td><td>Pacifico</td></tr><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_2.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_Hanwha3.png" /></td><td>Hanwha</td></tr></table>': layer_Confidential_Indicative_4,'<img src="legend/Militaryarea_3.png" /> Military area': layer_Militaryarea_3,"Vessel Density": layer_VesselDensity_2,"VWorld Street": layer_VWorldStreet_1,"KHOA Base Map (Water Depth)": layer_KHOABaseMapWaterDepth_0,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/SitefromPublicInfo_7.png" /> Site from Public Info': layer_SitefromPublicInfo_7,'Offshore projects SK_02 <br /><table><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_02_6_200Capacity1000.png" /></td><td>200> Capacity >=100</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_02_6_300Capacity2001.png" /></td><td>300> Capacity >=200</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_02_6_300Capacity3002.png" /></td><td>300> Capacity >=300</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_02_6_500Capacity4003.png" /></td><td>500> Capacity >=400</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_02_6_Over500MW4.png" /></td><td>Over 500 MW</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_02_6_Under100MW5.png" /></td><td>Under 100 MW</td></tr></table>': layer_OffshoreprojectsSK_02_6,'<img src="legend/Confidential_Indicative_5.png" /> Confidential_Indicative': layer_Confidential_Indicative_5,'<img src="legend/Militaryarea_4.png" /> Military area': layer_Militaryarea_4,"Vessel Density": layer_VesselDensity_3,"0_My Ocean": layer_0_MyOcean_2,"0_MyOSM": layer_0_MyOSM_1,"VWorld Street": layer_VWorldStreet_0,}).addTo(map);
         setBounds();
         var i = 0;
-        layer_Confidential_Indicative_4.eachLayer(function(layer) {
+        layer_Confidential_Indicative_5.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_Confidential_Indicative_4_eval_expression(context) !== null?String('<div style="color: #000000; font-size: 9pt; font-family: \'Calibri\', sans-serif;">' + exp_label_Confidential_Indicative_4_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Confidential_Indicative_4'});
+            layer.bindTooltip((exp_label_Confidential_Indicative_5_eval_expression(context) !== null?String('<div style="color: #c18803; font-size: 9pt; font-family: \'Calibri\', sans-serif;">' + exp_label_Confidential_Indicative_5_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Confidential_Indicative_5'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -656,12 +534,12 @@
               i++;
         });
         var i = 0;
-        layer_OffshoreprojectsSK_01offshore_projects_sk_01_5.eachLayer(function(layer) {
+        layer_OffshoreprojectsSK_02_6.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context) !== null?String('<div style="color: #00076c; font-size: 9pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_OffshoreprojectsSK_01offshore_projects_sk_01_5'});
+            layer.bindTooltip((exp_label_OffshoreprojectsSK_02_6_eval_expression(context) !== null?String('<div style="color: #00076c; font-size: 9pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + exp_label_OffshoreprojectsSK_02_6_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_OffshoreprojectsSK_02_6'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -669,12 +547,12 @@
               i++;
         });
         var i = 0;
-        layer_SitefromPublicInfo_6.eachLayer(function(layer) {
+        layer_SitefromPublicInfo_7.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Developer'] !== null?String('<div style="color: #0aa467; font-size: 9pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Developer']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SitefromPublicInfo_6'});
+            layer.bindTooltip((layer.feature.properties['Developer'] !== null?String('<div style="color: #0aa467; font-size: 9pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Developer']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SitefromPublicInfo_7'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -686,15 +564,15 @@
                 return this._bounds;
             }
         });
-        resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+        resetLabels([layer_Confidential_Indicative_5,layer_OffshoreprojectsSK_02_6,layer_SitefromPublicInfo_7]);
         map.on("zoomend", function(){
-            resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+            resetLabels([layer_Confidential_Indicative_5,layer_OffshoreprojectsSK_02_6,layer_SitefromPublicInfo_7]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+            resetLabels([layer_Confidential_Indicative_5,layer_OffshoreprojectsSK_02_6,layer_SitefromPublicInfo_7]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+            resetLabels([layer_Confidential_Indicative_5,layer_OffshoreprojectsSK_02_6,layer_SitefromPublicInfo_7]);
         });
         </script>
     </body>

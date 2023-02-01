@@ -757,7 +757,7 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_label_Confidential_Indicative_4_eval_expression(context) {
+function exp_label_Confidential_Indicative_5_eval_expression(context) {
     // "Project name" || ' ' || if("Capacity" > '0', "Capacity", 'xxx') || 'MW' || '\n' || "Developper"
 
     var feature = context.feature;
@@ -770,7 +770,7 @@ function exp_label_Confidential_Indicative_4_eval_expression(context) {
 }
 
 
-function exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context) {
+function exp_label_OffshoreprojectsSK_02_6_eval_expression(context) {
     // "Title" || ' ' || "Capacity" || 'MW'
 
     var feature = context.feature;
