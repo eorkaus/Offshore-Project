@@ -97,11 +97,12 @@
             maxNativeZoom: 18
         });
         layer_0_MyOcean_1;
+        map.addLayer(layer_0_MyOcean_1);
         map.createPane('pane_VWorldStreet_2');
         map.getPane('pane_VWorldStreet_2').style.zIndex = 402;
         var layer_VWorldStreet_2 = L.tileLayer('https://xdworld.vworld.kr/2d/Base/service/{z}/{x}/{y}.png', {
             pane: 'pane_VWorldStreet_2',
-            opacity: 0.4,
+            opacity: 0.5,
             attribution: '',
             minZoom: 1,
             maxZoom: 28,
