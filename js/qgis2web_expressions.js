@@ -757,27 +757,27 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_label_KoreaProjectData_4_eval_expression(context) {
-    // "Project name" || ' ' || if("Capacity" > 0, "Capacity", 'xxx') || 'MW'
+function exp_label_Confidential_Indicative_4_eval_expression(context) {
+    // "Project name" || ' ' || if("Capacity" > '0', "Capacity", 'xxx') || 'MW' || '\n' || "Developper"
 
     var feature = context.feature;
     
     if (feature.properties) {
-        return (((feature.properties['Project name']  + ' ') + fnc_if([(feature.properties['Capacity']  > 0),feature.properties['Capacity'] ,'xxx'], context)) + 'MW');
+        return (((((feature.properties['Project name']  + ' ') + fnc_if([(feature.properties['Capacity']  > '0'),feature.properties['Capacity'] ,'xxx'], context)) + 'MW') + '\n') + feature.properties['Developper'] );
     } else {
-        return (((feature['Project name']  + ' ') + fnc_if([(feature['Capacity']  > 0),feature['Capacity'] ,'xxx'], context)) + 'MW');
+        return (((((feature['Project name']  + ' ') + fnc_if([(feature['Capacity']  > '0'),feature['Capacity'] ,'xxx'], context)) + 'MW') + '\n') + feature['Developper'] );
     }
 }
 
 
 function exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context) {
-    // "Project Name (EN)" || ' ' || "Capacity" || 'MW'
+    // "Title" || ' ' || "Capacity" || 'MW'
 
     var feature = context.feature;
     
     if (feature.properties) {
-        return (((feature.properties['Project Name (EN)']  + ' ') + feature.properties['Capacity'] ) + 'MW');
+        return (((feature.properties['Title']  + ' ') + feature.properties['Capacity'] ) + 'MW');
     } else {
-        return (((feature['Project Name (EN)']  + ' ') + feature['Capacity'] ) + 'MW');
+        return (((feature['Title']  + ' ') + feature['Capacity'] ) + 'MW');
     }
 }

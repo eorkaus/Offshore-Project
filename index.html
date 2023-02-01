@@ -19,12 +19,13 @@
         </style>
         <title></title>
     </head>
-    <body>       
-	<div id="logo" style="display:block; position:absolute; bottom: 5px; left :5px; z-index:999; font-size:6pt; color:black"> 
+    <body>
+        <div id="logo"
+            style="display:block; position:absolute; bottom: 5px; left :5px; z-index:999; font-size:6pt; color:black">
             <img src="LogoK2.png" alt="K2 Management" width="30" hight="auto">
             <br><text>K2 Managment internal use<br>gjl@K2management.com</text>
-    </div>
-    <div id="map">
+        </div>
+        <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
@@ -36,9 +37,10 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-tilelayer-wmts.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="data/Militaryarea_3.js"></script>
-        <script src="data/KoreaProjectData_4.js"></script>
+        <script src="data/Confidential_Indicative_4.js"></script>
         <script src="data/OffshoreprojectsSK_01offshore_projects_sk_01_5.js"></script>
         <script src="data/SitefromPublicInfo_6.js"></script>
         <script>
@@ -49,7 +51,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[34.264303732142224,125.72736816947506],[36.173627747221175,130.08619385306756]]);
+        }).fitBounds([[32.95257477952335,124.35103274354792],[36.83581786219054,130.1836759236032]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -69,21 +71,25 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_KRBathymetry_0');
-        map.getPane('pane_KRBathymetry_0').style.zIndex = 400;
-        var img_KRBathymetry_0 = 'data/KRBathymetry_0.png';
-        var img_bounds_KRBathymetry_0 = [[32.495833333,123.4625],[40.691666667,130.65]];
-        var layer_KRBathymetry_0 = new L.imageOverlay(img_KRBathymetry_0,
-                                              img_bounds_KRBathymetry_0,
-                                              {pane: 'pane_KRBathymetry_0',
-                                              opacity: 0.0});
-        bounds_group.addLayer(layer_KRBathymetry_0);
-        map.addLayer(layer_KRBathymetry_0);
+        map.createPane('pane_KHOABaseMapWaterDepth_0');
+        map.getPane('pane_KHOABaseMapWaterDepth_0').style.zIndex = 400;
+        var layer_KHOABaseMapWaterDepth_0 = L.tileLayer.wmts('http://www.khoa.go.kr/oceanmap/wmts/1.0.0/3459F59F6843B4B745D054ED6/WMTSCapabilities.xm', {
+            pane: 'pane_KHOABaseMapWaterDepth_0',
+            layer: 'BASEMAP_DLENG3857',
+            tilematrixSet: 'OtmsCompatible',
+            format: 'image/png',
+            style: 'default',
+            uppercase: true,
+            transparent: true,
+            continuousWorld : true,
+            opacity: 1.0,
+            attribution: '',
+        });
         map.createPane('pane_VWorldStreet_1');
         map.getPane('pane_VWorldStreet_1').style.zIndex = 401;
         var layer_VWorldStreet_1 = L.tileLayer('https://xdworld.vworld.kr/2d/Base/service/{z}/{x}/{y}.png', {
             pane: 'pane_VWorldStreet_1',
-            opacity: 0.5,
+            opacity: 0.8,
             attribution: '',
             minZoom: 1,
             maxZoom: 28,
@@ -115,76 +121,16 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2">' + (feature.properties['TB_ZN_SEAT'] !== null ? autolinker.link(feature.properties['TB_ZN_SEAT'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['TB_ZN_SE_1'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_1'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE_2'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_2'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE_3'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_3'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE_4'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_4'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE_5'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_5'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE_6'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_6'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2">' + (feature.properties['TB_ZN_SE_7'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_7'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE_8'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_8'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2">' + (feature.properties['TB_ZN_SE_9'] !== null ? autolinker.link(feature.properties['TB_ZN_SE_9'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE10'] !== null ? autolinker.link(feature.properties['TB_ZN_SE10'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE11'] !== null ? autolinker.link(feature.properties['TB_ZN_SE11'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE12'] !== null ? autolinker.link(feature.properties['TB_ZN_SE12'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE13'] !== null ? autolinker.link(feature.properties['TB_ZN_SE13'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE14'] !== null ? autolinker.link(feature.properties['TB_ZN_SE14'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE15'] !== null ? autolinker.link(feature.properties['TB_ZN_SE15'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE16'] !== null ? autolinker.link(feature.properties['TB_ZN_SE16'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE17'] !== null ? autolinker.link(feature.properties['TB_ZN_SE17'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE18'] !== null ? autolinker.link(feature.properties['TB_ZN_SE18'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE19'] !== null ? autolinker.link(feature.properties['TB_ZN_SE19'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE20'] !== null ? autolinker.link(feature.properties['TB_ZN_SE20'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE21'] !== null ? autolinker.link(feature.properties['TB_ZN_SE21'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TB_ZN_SE22'] !== null ? autolinker.link(feature.properties['TB_ZN_SE22'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -252,7 +198,7 @@
             styles: [style_Militaryarea_3_0,style_Militaryarea_3_1,style_Militaryarea_3_2,]
         });
         bounds_group.addLayer(layer_Militaryarea_3);
-        function pop_KoreaProjectData_4(feature, layer) {
+        function pop_Confidential_Indicative_4(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -267,7 +213,13 @@
             });
             var popupContent = '<table>\
                     <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Project name'] !== null ? autolinker.link(feature.properties['Project name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Developper'] !== null ? autolinker.link(feature.properties['Developper'].toLocaleString()) : '') + '</td>\
@@ -275,11 +227,17 @@
                     <tr>\
                         <td colspan="2">' + (feature.properties['Capacity'] !== null ? autolinker.link(feature.properties['Capacity'].toLocaleString()) : '') + '</td>\
                     </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Memo'] !== null ? autolinker.link(feature.properties['Memo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#a9ea70',
@@ -287,8 +245,8 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#cc6c9b',
@@ -296,8 +254,8 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#5089ca',
@@ -305,8 +263,8 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#2974c9',
@@ -314,8 +272,8 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#a9ea70',
@@ -323,8 +281,8 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#cc6c9b',
@@ -332,8 +290,8 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#5089ca',
@@ -341,8 +299,8 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        var pattern_KoreaProjectData_4_0 = new L.StripePattern({
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        var pattern_Confidential_Indicative_4_0 = new L.StripePattern({
             weight: 0.3,
             spaceWeight: 2.0,
             color: '#2974c9',
@@ -350,52 +308,52 @@
             spaceOpacity: 0,
             angle: 225
         });
-        pattern_KoreaProjectData_4_0.addTo(map);
-        function style_KoreaProjectData_4_0(feature) {
+        pattern_Confidential_Indicative_4_0.addTo(map);
+        function style_Confidential_Indicative_4_0(feature) {
             switch(String(feature.properties['Developper'])) {
                 case 'KREDO':
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 stroke: false,
                 fillOpacity: 1,
-                fillPattern: pattern_KoreaProjectData_4_0,
+                fillPattern: pattern_Confidential_Indicative_4_0,
                 interactive: true,
             }
                     break;
                 case 'Pacifico':
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 stroke: false,
                 fillOpacity: 1,
-                fillPattern: pattern_KoreaProjectData_4_0,
+                fillPattern: pattern_Confidential_Indicative_4_0,
                 interactive: true,
             }
                     break;
                 default:
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 stroke: false,
                 fillOpacity: 1,
-                fillPattern: pattern_KoreaProjectData_4_0,
+                fillPattern: pattern_Confidential_Indicative_4_0,
                 interactive: true,
             }
                     break;
                 case 'Hanwha':
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 stroke: false,
                 fillOpacity: 1,
-                fillPattern: pattern_KoreaProjectData_4_0,
+                fillPattern: pattern_Confidential_Indicative_4_0,
                 interactive: true,
             }
                     break;
             }
         }
-        function style_KoreaProjectData_4_1(feature) {
+        function style_Confidential_Indicative_4_1(feature) {
             switch(String(feature.properties['Developper'])) {
                 case 'KREDO':
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 opacity: 1,
                 color: 'rgba(169,234,112,1.0)',
                 dashArray: '',
@@ -408,7 +366,7 @@
                     break;
                 case 'Pacifico':
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 opacity: 1,
                 color: 'rgba(204,108,155,1.0)',
                 dashArray: '',
@@ -421,7 +379,7 @@
                     break;
                 default:
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 opacity: 1,
                 color: 'rgba(80,137,202,1.0)',
                 dashArray: '',
@@ -434,7 +392,7 @@
                     break;
                 case 'Hanwha':
                     return {
-                pane: 'pane_KoreaProjectData_4',
+                pane: 'pane_Confidential_Indicative_4',
                 opacity: 1,
                 color: 'rgba(41,116,201,1.0)',
                 dashArray: '',
@@ -447,19 +405,20 @@
                     break;
             }
         }
-        map.createPane('pane_KoreaProjectData_4');
-        map.getPane('pane_KoreaProjectData_4').style.zIndex = 404;
-        map.getPane('pane_KoreaProjectData_4').style['mix-blend-mode'] = 'normal';
-        var layer_KoreaProjectData_4 = new L.geoJson.multiStyle(json_KoreaProjectData_4, {
+        map.createPane('pane_Confidential_Indicative_4');
+        map.getPane('pane_Confidential_Indicative_4').style.zIndex = 404;
+        map.getPane('pane_Confidential_Indicative_4').style['mix-blend-mode'] = 'normal';
+        var layer_Confidential_Indicative_4 = new L.geoJson.multiStyle(json_Confidential_Indicative_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_KoreaProjectData_4',
-            layerName: 'layer_KoreaProjectData_4',
-            pane: 'pane_KoreaProjectData_4',
-            onEachFeature: pop_KoreaProjectData_4,
-            styles: [style_KoreaProjectData_4_0,style_KoreaProjectData_4_1,]
+            dataVar: 'json_Confidential_Indicative_4',
+            layerName: 'layer_Confidential_Indicative_4',
+            pane: 'pane_Confidential_Indicative_4',
+            onEachFeature: pop_Confidential_Indicative_4,
+            styles: [style_Confidential_Indicative_4_0,style_Confidential_Indicative_4_1,]
         });
-        bounds_group.addLayer(layer_KoreaProjectData_4);
+        bounds_group.addLayer(layer_Confidential_Indicative_4);
+        map.addLayer(layer_Confidential_Indicative_4);
         function pop_OffshoreprojectsSK_01offshore_projects_sk_01_5(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -507,8 +466,8 @@
         }
 
         function style_OffshoreprojectsSK_01offshore_projects_sk_01_5_0(feature) {
-            switch(String(feature.properties['Developer'])) {
-                case 'Busan Offshore Wind Power Co., Ltd.':
+            switch(String(feature.properties['q2wHide_CPRange'])) {
+                case '200> Capacity >=100':
                     return {
                 pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
                 opacity: 1,
@@ -519,11 +478,11 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(236,106,36,1.0)',
+                fillColor: 'rgba(130,117,228,1.0)',
                 interactive: true,
             }
                     break;
-                case 'CIP':
+                case '300> Capacity >=200':
                     return {
                 pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
                 opacity: 1,
@@ -534,11 +493,11 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(189,136,239,1.0)',
+                fillColor: 'rgba(105,205,18,1.0)',
                 interactive: true,
             }
                     break;
-                case 'CJ Group\'s C&I Leisure Industry':
+                case '300> Capacity >=300':
                     return {
                 pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
                 opacity: 1,
@@ -549,11 +508,11 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(138,26,202,1.0)',
+                fillColor: 'rgba(33,232,112,1.0)',
                 interactive: true,
             }
                     break;
-                case 'CNCore':
+                case '500> Capacity >=400':
                     return {
                 pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
                 opacity: 1,
@@ -564,11 +523,11 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(60,211,178,1.0)',
+                fillColor: 'rgba(213,175,94,1.0)',
                 interactive: true,
             }
                     break;
-                case 'CWNRE(Daehan Green Energy)':
+                case 'Over 500 MW':
                     return {
                 pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
                 opacity: 1,
@@ -579,11 +538,11 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(67,213,111,1.0)',
+                fillColor: 'rgba(225,61,231,1.0)',
                 interactive: true,
             }
                     break;
-                case 'Daehan Green Energy':
+                case 'Under 100 MW':
                     return {
                 pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
                 opacity: 1,
@@ -594,652 +553,7 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(238,136,124,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'DL Energy (Daelim Group)':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(30,103,239,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Doosan Enerbility':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(221,39,109,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Dooson Construction':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(119,128,216,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Equinor':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(29,227,43,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Gasado Wind Power Co., Ltd':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(205,105,119,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'GIG, TOTAL':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(101,60,215,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'GIG,TOTAL Energies':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(206,50,167,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Gunsan Test Bed':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(192,27,214,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Gwanglim':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(213,194,102,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Haesung Energy':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(210,32,145,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Hanwha Corp. E&C':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(237,120,122,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Hyundai Construction':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(203,143,54,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Jeonnam Techno Park':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(144,97,214,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'KCH':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(211,229,15,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'KEPCO':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(201,80,185,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'KNOC':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(209,113,139,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'KOEN':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(122,232,76,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Kolon Global':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(79,237,224,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Korea Institute of Energy Research':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(129,229,232,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Korea Offshore Wind Power Co,.Ltd.':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(200,68,240,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Korea Wind Energy Co., Ltd':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(129,226,194,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'KOWEPO':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(112,220,88,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'KOWEPO, KOEN':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(81,53,240,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Myungwoon Industry Development Co., Ltd.':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(64,164,203,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Northland Power':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(154,202,117,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'OW':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(221,55,221,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Posco Energy':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(22,140,219,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Rena':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(128,233,121,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Samhae':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(73,189,210,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Samhyun System':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(14,227,53,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Shell':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(215,74,145,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Sinahn Eoui Wind Power Co., LTD':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(117,200,16,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'SK E&S':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(27,222,134,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'SK E&S, CIP':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(195,226,71,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'SK Eco Plant':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,185,67,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'SM Group':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(207,64,21,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Tamra Wind Power Co., Ltd.':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(229,224,91,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Unison':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(191,225,123,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Vena Energy':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(111,106,240,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Windway':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(87,146,208,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Yeompo Wind Power Co., Ltd':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(205,146,95,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Yeonggwang OWF':
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(108,132,220,1.0)',
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_OffshoreprojectsSK_01offshore_projects_sk_01_5',
-                opacity: 1,
-                color: 'rgba(125,139,143,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(131,219,167,1.0)',
+                fillColor: 'rgba(236,35,69,1.0)',
                 interactive: true,
             }
                     break;
@@ -1326,15 +640,15 @@
         bounds_group.addLayer(layer_SitefromPublicInfo_6);
         map.addLayer(layer_SitefromPublicInfo_6);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/SitefromPublicInfo_6.png" /> Site from Public Info': layer_SitefromPublicInfo_6,'Offshore projects SK_01 — offshore_projects_sk_01<br /><table><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_BusanOffshoreWindPowerCoLtd0.png" /></td><td>Busan Offshore Wind Power Co., Ltd.</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_CIP1.png" /></td><td>CIP</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_CJGroupsCILeisureIndustry2.png" /></td><td>CJ Group\'s C&I Leisure Industry</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_CNCore3.png" /></td><td>CNCore</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_CWNREDaehanGreenEnergy4.png" /></td><td>CWNRE(Daehan Green Energy)</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_DaehanGreenEnergy5.png" /></td><td>Daehan Green Energy</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_DLEnergyDaelimGroup6.png" /></td><td>DL Energy (Daelim Group)</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_DoosanEnerbility7.png" /></td><td>Doosan Enerbility</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_DoosonConstruction8.png" /></td><td>Dooson Construction</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Equinor9.png" /></td><td>Equinor</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_GasadoWindPowerCoLtd10.png" /></td><td>Gasado Wind Power Co., Ltd</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_GIGTOTAL11.png" /></td><td>GIG, TOTAL</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_GIGTOTALEnergies12.png" /></td><td>GIG,TOTAL Energies</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_GunsanTestBed13.png" /></td><td>Gunsan Test Bed</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Gwanglim14.png" /></td><td>Gwanglim</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_HaesungEnergy15.png" /></td><td>Haesung Energy</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_HanwhaCorpEC16.png" /></td><td>Hanwha Corp. E&C</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_HyundaiConstruction17.png" /></td><td>Hyundai Construction</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_JeonnamTechnoPark18.png" /></td><td>Jeonnam Techno Park</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KCH19.png" /></td><td>KCH</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KEPCO20.png" /></td><td>KEPCO</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KNOC21.png" /></td><td>KNOC</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KOEN22.png" /></td><td>KOEN</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KolonGlobal23.png" /></td><td>Kolon Global</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KoreaInstituteofEnergyResearch24.png" /></td><td>Korea Institute of Energy Research</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KoreaOffshoreWindPowerCoLtd25.png" /></td><td>Korea Offshore Wind Power Co,.Ltd.</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KoreaWindEnergyCoLtd26.png" /></td><td>Korea Wind Energy Co., Ltd</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KOWEPO27.png" /></td><td>KOWEPO</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_KOWEPOKOEN28.png" /></td><td>KOWEPO, KOEN</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_MyungwoonIndustryDevelopmentCoLtd29.png" /></td><td>Myungwoon Industry Development Co., Ltd.</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_NorthlandPower30.png" /></td><td>Northland Power</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_OW31.png" /></td><td>OW</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_PoscoEnergy32.png" /></td><td>Posco Energy</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Rena33.png" /></td><td>Rena</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Samhae34.png" /></td><td>Samhae</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_SamhyunSystem35.png" /></td><td>Samhyun System</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Shell36.png" /></td><td>Shell</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_SinahnEouiWindPowerCoLTD37.png" /></td><td>Sinahn Eoui Wind Power Co., LTD</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_SKES38.png" /></td><td>SK E&S</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_SKESCIP39.png" /></td><td>SK E&S, CIP</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_SKEcoPlant40.png" /></td><td>SK Eco Plant</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_SMGroup41.png" /></td><td>SM Group</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_TamraWindPowerCoLtd42.png" /></td><td>Tamra Wind Power Co., Ltd.</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Unison43.png" /></td><td>Unison</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_VenaEnergy44.png" /></td><td>Vena Energy</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Windway45.png" /></td><td>Windway</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_YeompoWindPowerCoLtd46.png" /></td><td>Yeompo Wind Power Co., Ltd</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_YeonggwangOWF47.png" /></td><td>Yeonggwang OWF</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_48.png" /></td><td></td></tr></table>': layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,'Korea Project Data<br /><table><tr><td style="text-align: center;"><img src="legend/KoreaProjectData_4_KREDO0.png" /></td><td>KREDO</td></tr><tr><td style="text-align: center;"><img src="legend/KoreaProjectData_4_Pacifico1.png" /></td><td>Pacifico</td></tr><tr><td style="text-align: center;"><img src="legend/KoreaProjectData_4_2.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/KoreaProjectData_4_Hanwha3.png" /></td><td>Hanwha</td></tr></table>': layer_KoreaProjectData_4,'<img src="legend/Militaryarea_3.png" /> Military area': layer_Militaryarea_3,"Vessel Density": layer_VesselDensity_2,"VWorld Street": layer_VWorldStreet_1,"KR Bathymetry": layer_KRBathymetry_0,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/SitefromPublicInfo_6.png" /> Site from Public Info': layer_SitefromPublicInfo_6,'Offshore projects SK_01 — offshore_projects_sk_01<br /><table><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_200Capacity1000.png" /></td><td>200> Capacity >=100</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_300Capacity2001.png" /></td><td>300> Capacity >=200</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_300Capacity3002.png" /></td><td>300> Capacity >=300</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_500Capacity4003.png" /></td><td>500> Capacity >=400</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Over500MW4.png" /></td><td>Over 500 MW</td></tr><tr><td style="text-align: center;"><img src="legend/OffshoreprojectsSK_01offshore_projects_sk_01_5_Under100MW5.png" /></td><td>Under 100 MW</td></tr></table>': layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,'Confidential_Indicative<br /><table><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_KREDO0.png" /></td><td>KREDO</td></tr><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_Pacifico1.png" /></td><td>Pacifico</td></tr><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_2.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/Confidential_Indicative_4_Hanwha3.png" /></td><td>Hanwha</td></tr></table>': layer_Confidential_Indicative_4,'<img src="legend/Militaryarea_3.png" /> Military area': layer_Militaryarea_3,"Vessel Density": layer_VesselDensity_2,"VWorld Street": layer_VWorldStreet_1,"KHOA Base Map (Water Depth)": layer_KHOABaseMapWaterDepth_0,}).addTo(map);
         setBounds();
         var i = 0;
-        layer_KoreaProjectData_4.eachLayer(function(layer) {
+        layer_Confidential_Indicative_4.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_KoreaProjectData_4_eval_expression(context) !== null?String('<div style="color: #000000; font-size: 6pt; font-family: \'Calibri\', sans-serif;">' + exp_label_KoreaProjectData_4_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_KoreaProjectData_4'});
+            layer.bindTooltip((exp_label_Confidential_Indicative_4_eval_expression(context) !== null?String('<div style="color: #000000; font-size: 9pt; font-family: \'Calibri\', sans-serif;">' + exp_label_Confidential_Indicative_4_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Confidential_Indicative_4'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -1347,7 +661,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context) !== null?String('<div style="color: #00076c; font-size: 9pt; font-family: \'Calibri\', sans-serif;">' + exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_OffshoreprojectsSK_01offshore_projects_sk_01_5'});
+            layer.bindTooltip((exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context) !== null?String('<div style="color: #00076c; font-size: 9pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + exp_label_OffshoreprojectsSK_01offshore_projects_sk_01_5_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_OffshoreprojectsSK_01offshore_projects_sk_01_5'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -1372,16 +686,16 @@
                 return this._bounds;
             }
         });
-        resetLabels([layer_KoreaProjectData_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+        resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
         map.on("zoomend", function(){
-            resetLabels([layer_KoreaProjectData_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+            resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_KoreaProjectData_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+            resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_KoreaProjectData_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
+            resetLabels([layer_Confidential_Indicative_4,layer_OffshoreprojectsSK_01offshore_projects_sk_01_5,layer_SitefromPublicInfo_6]);
         });
         </script>
-
+    </body>
 </html>
