@@ -757,21 +757,8 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_label_Confidential_Indicative_5_eval_expression(context) {
-    // "Project name" || ' ' || if("Capacity" > '0', "Capacity", 'xxx') || 'MW' || '\n' || "Developper"
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (((((feature.properties['Project name']  + ' ') + fnc_if([(feature.properties['Capacity']  > '0'),feature.properties['Capacity'] ,'xxx'], context)) + 'MW') + '\n') + feature.properties['Developper'] );
-    } else {
-        return (((((feature['Project name']  + ' ') + fnc_if([(feature['Capacity']  > '0'),feature['Capacity'] ,'xxx'], context)) + 'MW') + '\n') + feature['Developper'] );
-    }
-}
-
-
-function exp_label_OffshoreprojectsSK_02_7_eval_expression(context) {
-    // "Title" || ' ' || "Capacity" || 'MW'
+function exp_label_offshore_projects_in_south_korea_area_1_eval_expression(context) {
+    // Title || ' ' || Capacity || 'MW'
 
     var feature = context.feature;
     
